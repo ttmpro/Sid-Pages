@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sid Pages</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
+
+  #particles-js {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f4f4f4;
+  z-index: -1;
+}
+a {
+  color: #3498db; /* Change this color code to your preferred color */
+  text-decoration: none;
+}
+
+
+    header {
+      background-color: #2echj1;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      z-index: 2;
+      overflow: hidden; /* Hide potential horizontal overflow within the header */      backdrop-filter: blur(30px); /* Blur effect */
+    }
+
+    header img {
+    	height: auto;
+    	/* Adjust the height as needed */
+    	width: auto;
+    	max-width: 100%;
+    }
+
+    nav {
+      background-color: #333;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      z-index: 2;
+    }
+
+  .main-container {
+  padding: 10px;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(30px); /* Blur effect */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+
+    .rectangle-box,
+    .square-box {
+      background-color: rgba(236, 240, 241, 0.8); /* Transparent with alpha channel */
+      color: #333;
+      padding: 20px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      text-align: center;
+      text-decoration: none;
+      display: block; /* Display as block for proper vertical alignment */
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+      backdrop-filter: blur(0.px); /* Blur effect */
+    }
+
+    .square-boxes {
+      display: flex;
+      flex-wrap: wrap; /* Ensure proper wrapping of square boxes on smaller screens */
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .square-box {
+      flex: 1;
+      margin: 0 10px;
+    }
+
+    .square-box:hover,
+    .rectangle-box:hover {
+      background-color: rgba(211, 214, 217, 0.8); /* Hover effect with alpha channel */
+    }
+
+    .about-us {
+      margin-top: 20px;
+    }
+
+    .posts {
+      margin-top: 20px;
+    color: #000000; /* Change this color to your preference */
+ 
+
+    }
+
+    .social-media {
+      margin-top: 20px;
+    }
+
+    footer {
+  background-color: #363636;
+  color: white;
+  text-align: center;
+  padding: 50px;
+  /* position: fixed; */ /* Remove this line */
+  bottom: 0;
+  width: auto;
+  z-index: 2backdrop-filter: blur(80px); /* Blur effect */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      .menu-icon {
+        display: block;
+        cursor: pointer;
+        text-align: right;
+        padding: 10px;
+        color: black;
+        font-size: 20px;
+      }
+
+      .menu-links {
+        display: none;
+        padding: 10px;
+        background-color: rgba(236, 240, 241, 0.8);
+        color: white;
+        z-index: 2;
+      }
+
+      .square-box {
+        flex: 100%; /* Make square boxes full width on smaller screens */
+        margin: 0 0 10px 0;
+      }
+    }
+
+    /* New CSS for mobile responsiveness */
+    .menu-links.show {
+      display: block;
+    }
+    
+  /* Popup CSS */
+  .popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index:4;
+  }
+
+  .popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 300px; /* Adjust the max-width as needed */
+    width: 100%;
+  }
+
+  .popup-button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  } #screenshots-container {
+            overflow-x: auto;
+            white-space: nowrap;
+            margin-top: 20px;
+        }
+
+        .screenshot {
+            max-width: 60%;
+            height: auto;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+        } 
+
+
+
+  </style>
+
+
+
+</head>
+<body>
+
+  <div id="particles-js"></div>
+
+  <header>
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpUW0heJva1_l4Og85pu9UZCBUFfrUCTUBxIp8ynjFKX_0csiZQZi74369SpHwdclePONM6MaHMvil-1GilOc9cgxmk3ozqBs3iL1ObOx8-cqcQYhfu65Ql49TYjWugoy7JdGkBON2gN9oXpsm_UaBUiYkTKB16M4XsTn7JRKD2-_VnVDHKKJREZTiJNPH/s1280/Picsart_24-02-04_17-42-57-526.png" alt="Your Logo">
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+  </header>
+
+  <nav class="menu-links">
+    <a href="#">Home | </a>
+    <a href="#">Services |</a>
+    <a href="#">About Us |</a>
+    <a href="#">Contact </a>
+  </nav>
+
+  <div class="main-container">
+    <a href="orderpage.html" class="rectangle-box">
+      <h2>Order Your first Website now!  🎉</h2>
+      <p>in just ₹20</p>
+      
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirQGJL6vyzGCP4Aj_uxNIRJCW6jnVhIRgkZkjP2OfjBt5fH-0VJgWxAGFpQoSdSgS-sq2txL-O4nQaSOvTqT0RtY3XJmp_6DHPu3iCymWpV_EAS17X2IZB3vVelZHz2V3zThypjX8oGb6t9bo6w8MNaGTPkIId8PplJUCf6Z0VF3fU4QMjSOJLISjEgtSN/s1079/Picsart_24-02-04_02-08-53-829.png" alt="Icon" style="max-width: 100%; height: auto;">
+    </a>
+
+    <div class="square-boxes">
+      <a href="techtvmedia.pay@gmail.com" class="square-box"><h2>Get Your Own Fully Customized Website .  🛠
+      </h2>
+      <p>in less than ₹299 (free hosting)</p>
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMnqmNssDCr1RRUlQq4m1endNolb-9qOqDjoF-HvO6K8si7TmjrJw4qVcm2nPkVon_TEc7FrykV9fJKPW6MdULFWWOeJ4HdxuEzCuWY7NRgdmv2_eKKC27zIonVE3aaCKGqTmUeJ_prhGgXHYgynfBrOEnsvC8Z9zZJYO26AxrBBl3AeIfd97dfUimwiVn/s1079/Picsart_24-02-04_02-28-39-475.png" alt="icon2" style="max-width: 100%; height: auto;">
+      </a>
+      <a href="techtvmedia.pay@gmail.com" class="square-box"><h2>Help & Support 💬
+      </h2>
+      <p>payment or order related issue? </p> 
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEglBZNhMCYvoc_ViAyrbZ5NDTWOFiNlZuwZjWG-edxEfHwrAtZcQzE0_yT9Px1TLalDtO6-O5TJKsXAcud5vPX-PS318zmlvQ8PEfBw4JEKUGEXzotBq8vKnsF1GwqQK74z3Hz59YYaEmT7hiLDnWyPlmoLTJYRGLwi9E1elRPy4GGSkcah2DyCpaxkVK_W/s1079/Picsart_24-02-04_02-42-23-267.png" alt="icon3" style="max-width: 100%; height: auto;">
+      
+      </a>
+    </div>
+
+    <div class="screenshots-container">
+      <h2>DEMO</h2><li>slide ⬅</li>
+   <div id="screenshots-container">
+   <img alt="Screenshot 2" class="screenshot" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEic6iLTXk8_ExRqvLfx2nhyQnjGUGhbZ1h5H8KIvTLHTuv8LN2ADErocCCVxg_nXCbP2ajpkG2Ds9rxGy1s7rqEykYIEoJaVh1_3yLtuq4Qq_7Hy9n3APaKabxETRin1bKrmM-gJmYZOGjdnn4RZ2HAwZxgTfjAcKaJJVtAt1N64NMnRNbRz-cxbdG9dgBx/s1281/Picsart_24-02-04_03-27-43-871.png" />
+      <img alt="Screenshot 2" class="screenshot" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjta98LSOt1wssfHX1Wbt3JuIpmVsZ_PXJsAvwJNZyDg9AL2Ut4k1KswNHWASxf6jbxPrTqJSarDE4CqQ-v6_GqfXsalCw-iOMJrX4awxpWydHzUamfss0HVnabzeNnx5x-0hUrb5NdPS5R1pYdirzqZAF7r32Na-c53bYtFzu7Jq0V26K5dkqilbjlJJQ4/s1281/Picsart_24-02-04_03-20-26-367.png" /><img alt="Screenshot 2" class="screenshot" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjH3JbbD8vcD_nfaEDWbH55kwb7mheNoswIle7PKAohVM54miyOzi7fY9_Du5n55SRX9FpfO7s_dPMXaC4_fagPmV8sqlcs28uPpj4FQRz__Cw3tRIuwfZn0145kdM0OOVW0COd9rhPS2-dv-Z9oTX8980QLKRUMRGG46qt_LGkQa1JsnaoVlexU9lHNRx5/s1281/Picsart_24-02-04_03-41-28-545.png"
+    /> <img alt="Screenshot 2" class="screenshot" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg_wisrCoMnYouk0Nmqm1L-YLx9FiAERCUtu9DHmwkuc1fds1XDBCtFoK9Q5LpsdTKzg9Xq8CiXPkRvztMiEMHIhfrr7fP6QRHa00KCuCfe1ouuPKJEPJ3N8NZHPjsJWn378hWuFs51A8QQ1rW7e7ALgxFcbTIVG7hxf29QN9BOf6ZtoffmsLwGPuJVfQza/s1281/Picsart_24-02-04_03-35-50-514.png" /></div>
+    </div>
+
+    <div class="posts">
+      
+      
+  <h2>Welcome to Sid Pages</h2>
+  <p>Empowering Small Businesses and Startups with Budget-Friendly Web Solutions</p>
+  <p>Sid Pages is your go-to destination for professional and affordable website solutions. We specialize in crafting bespoke landing pages and fully customizable websites tailored to meet the unique needs of schools, coaching centers, and various businesses.</p>
+  <p>Our mission is to enable small-scale enterprises to establish and maintain a strong online presence without breaking the bank. We believe in the transformative power of a well-designed website to elevate your brand and reach a wider audience.</p>
+  <p>Whether you need a captivating landing page or a feature-rich website, Sid Pages is here to turn your vision into reality. Let's build an online identity that reflects the essence of your business and helps it thrive in the digital landscape.</p>
+  <p>Take the first step towards a successful online journey with Sid Pages!</p>
+
+
+      <!-- Add posts with images, titlesrnfnfnfnnrfnnf, and descriptions here -->
+    </div>
+
+    <div class="social-media">
+      <h2>Follow Us</h2>
+      <!-- Add social media links with logos here --><style>
+      	.social-media-icons {
+      		display: flex;
+      		justify-content: space-around;
+      		align-items: center;
+      	}
+      
+      	.social-media-icons a {
+      		display: inline-block;
+      		margin: 0 10px;
+      	}
+      
+      	.social-media-icons img {
+      		max-width: 30px;
+      		/* Adjust the max-width as needed to control the size of icons */
+      		height: auto;
+      	}
+      </style>
+      
+      <div class="social-media-icons">
+      	<a href="https://www.instagram.com/techtv_media/" target="_blank"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7OU-4tHUY0d0k6rSttEY2oUIs2J9AsZMhhvVsAdzCtfG4E7R-LRxxpeJC6ZDl836sloQIVDnRQooRtmrh8aWSquJE8G9skk5RdIONxl3qgCdUK42jot-kwsB75Bp80WR0O5vMI2bdUM40ld7iHZdJdqPd0xnPr51bGW5gu8RbEIMXRNtvsT3JaauRqAA/s2359/Picsart_24-02-03_01-36-16-699.png" alt="instagram"></a>
+      	<a href="https://twitter.com/techtv_media" target="_blank"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj6Bxn-PcAgJs6gV5i8Ius4dRO5QamWCqNjpeQIbj_LiZnAyGs6_CpOEyc81BNJT0XVNJ5lzz0LegWupl7Ypkv74clDCiMXJUFCZAjNd8UaYVUCSmdD8D-ImIUnueIzfFfkRuUQEzERZKfNkmZGIeol-FuVDXMu9nfPiyRmR_GFQDBu0JEOxaYYfs_biSI/s114/Picsart_24-02-03_01-35-02-577.png" alt="Twitter"></a> 	<a href="https://youtube.com/@TechTv_Media?si=LrXJQy8xNLm3Oa9_" target="_blank"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjJENGLXHGvZa-mzXXDP7ml0CQcT0_di_KzrNWDG35uC4D6TTr5ekYYZfDUd_FS5Ml68AaJIXsOflmoxUdKV80uHqCW0gXd6-iQBbiyDFCnObz1ZFdCkCGpUCg2rigzu3K3S8aBUIC9oxJBEOjDDsfQGKWDx2FU0h6_9z68nYX0Kx7utVAdt_SR8FH-GfY/s2567/Picsart_24-02-03_01-33-51-257.png" alt="youtube"></a> 	<a href="https://t.me/techtv_media" target="_blank"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg8zbJAqQibSCZBfUVFlzqVejJgd8p3fVsIxNwhR59G_nWenEykAMyKL_FiC3Wj1VnRUputleKsqe-MQICOdWeBKmf_uYkWiBfeMPNwONLisQmfXm3-wwC6mZNlxLDUyOBMrco5x5pdOmDhKLhOu0BGyKz8hharbjFWMxosdfckQc18-R9wvJv8llNnIT0/s2144/Picsart_24-02-03_01-34-19-381.png" alt="Telegram"></a>
+      	<!-- Add more social media icons as needed -->
+      </div>
+    </div>
+  </div>
+  
+
+  <footer>
+     <a href="https://www.instagram.com/techtv_media/">© TechTv Media |</a>
+     <!-- Add this within the <body> of your HTML, preferably near the end -->
+     <a href="javascript:void(0);" onclick="openPrivacyPopup()">Privacy & Policy |
+</a>
+     <div class="footer">
+     	<!-- Other footer content -->
+     
+     	<a href="#" onclick="showTermsPopup()">Terms & Conditions</a>
+     </div>
+     
+     <!-- Popup HTML for Terms and Conditions -->
+     <div class="popup-overlay" id="termsPopupOverlay">
+     	<div class="popup-content">
+     		<h2>Terms and Conditions</h2><li>scroll and read</li>
+     		<p>By using this website, you agree to the following terms and conditions:</p>
+     
+     		<ol>
+     			<li><strong>No Refund Policy:</strong> All orders are non-refundable. Once an order is placed, it cannot be canceled or refunded.</li>
+     
+     			<li><strong>Order Delays:</strong> We reserve the right to delay the processing or completion of users' orders due to unforeseen circumstances or high demand.</li>
+     
+     			<li><strong>Order Cancellation:</strong> We may cancel any order at any time, and users will be notified accordingly. Circumstances leading to order cancellation include, but are not limited to, violation of terms, insufficient information, or payment issues.</li>
+     
+     			<li><strong>Requirement Completion:</strong> While we strive to meet users' requirements, we do not guarantee the complete fulfillment of all specifications. Users are advised to provide clear and accurate details during the order process.</li>
+     
+     			<!-- Add more terms as needed -->
+     
+     		</ol>
+     
+     		<p>It is your responsibility to review these terms regularly and check for any updates. Continued use of the website constitutes acceptance of the updated terms.</p>
+     
+     		<button class="popup-button" onclick="closeTermsPopup()">Close</button>
+     	</div>
+     </div>
+     
+<style>
+  /* Updated styles for the popup */
+  .popup-content {
+    background: #356780;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 80%; /* Adjust the max-width as needed */
+    width: 100%;
+    overflow-y: auto; /* Add scroll functionality */
+    max-height: 70vh; /* Set a maximum height for the popup */
+  }
+</style>
+<!-- Add this code in the <body> section of your HTML, possibly near the end of the document -->
+
+<!-- Privacy Policy Popup HTML -->
+<div class="popup-overlay" id="privacyPopupOverlay">
+  <div class="popup-content">
+    <h2>Privacy Policy </h2><li>scroll & read </li>
+    <p>We care about your privacy and strive to create a safe and enjoyable user experience. By using our website, you agree to the terms outlined in this privacy policy.</p>
+    
+    <h3>Information Collection</h3>
+    <p>We may collect information, including personal data, when you use our website. This information is used for improving our services and providing a personalized experience.</p>
+
+    <h3>Cookie Usage</h3>
+    <p>We use cookies to enhance functionality, analyze website traffic, and provide a better user experience. By using our site, you consent to the use of cookies.</p>
+
+    <h3>Order and Request Information</h3>
+    <p>User orders and requests are kept confidential. We do not publicly disclose or release user information. However, users are responsible for safeguarding their credentials.</p>
+
+    <button class="popup-button" onclick="closePrivacyPopup()">Close</button>
+  </div>
+</div>
+
+<!-- Add this script near the other script tag in the <body> section -->
+<script>
+// Remove this part from your existing  
+
+
+
+</script>
+
+     
+     <script>
+     	// JavaScript functions for Terms and Conditions Popup
+     	document.addEventListener('DOMContentLoaded', function() {
+     		const termsPopupOverlay = document.getElementById('termsPopupOverlay');
+     
+     		window.showTermsPopup = function() {
+     			termsPopupOverlay.style.display = 'flex';
+     		};
+     
+     		window.closeTermsPopup = function() {
+     			termsPopupOverlay.style.display = 'none';
+     		};
+     	});
+     </script>
+  </footer>
+  <!-- Popup HTML -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-content">
+<h2>Terms and Conditions (scrolldown & read)</h2>
+
+     		<p>By using this website, you agree to the following terms and conditions:(⬇ sroll down and reed all the terms and conditions .)</p>
+     
+     		<ol>
+     			<li><strong>No Refund Policy:</strong> All orders are non-refundable. Once an order is placed, it cannot be canceled or refunded.</li>
+     
+     			<li><strong>Order Delays:</strong> We reserve the right to delay the processing or completion of users' orders due to unforeseen circumstances or high demand.</li>
+     
+     			<li><strong>Order Cancellation:</strong> We may cancel any order at any time, and users will be notified accordingly. Circumstances leading to order cancellation include, but are not limited to, violation of terms, insufficient information, or payment issues.</li>
+     
+     			<li><strong>Requirement Completion:</strong> While we strive to meet users' requirements, we do not guarantee the complete fulfillment of all specifications. Users are advised to provide clear and accurate details during the order process.</li>
+     
+     			<!-- Add more terms as needed -->
+     
+     		</ol>
+     
+     		<p>It is your responsibility to review these terms regularly and check for any updates. Continued use of the website constitutes acceptance of the updated terms.</p>
+     
+    <button class="popup-button" onclick="closePopup()">I Agree</button>
+  </div>
+  
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const popupOverlay = document.getElementById('popupOverlay');
+
+    // Function to close the popup and set agreement status in localStorage
+    window.closePopup = function () {
+      popupOverlay.style.display = 'none';
+      localStorage.setItem('hasAgreed', 'true');
+    };
+
+    // Delay the popup after 5 seconds
+    setTimeout(function () {
+      // Check if the user has agreed to the terms (using localStorage)
+      const hasAgreed = localStorage.getItem('hasAgreed');
+
+      if (!hasAgreed) {
+        // Show the popup if the user has not agreed
+        popupOverlay.style.display = 'flex';
+      }
+    }, 5000); // 5000 milliseconds (5 seconds)
+  });
+</script><script>
+  function closePrivacyPopup() {
+    const privacyPopupOverlay = document.getElementById('privacyPopupOverlay');
+    privacyPopupOverlay.style.display = 'none';
+  }
+</script><script>
+  function openPrivacyPopup() {
+    const privacyPopupOverlay = document.getElementById('privacyPopupOverlay');
+    privacyPopupOverlay.style.display = 'flex';
+  }
+</script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    window.addEventListener('load', function() {
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 30 },
+          color: { value: ["#E34234", "#F28500", "#FFBF00", "#1E90FF"] },
+          shape: { type: "circle" },
+          opacity: { value: 0.7 },
+          size: { value: 400 },
+          line_linked: { enable: true, distance: 150, color: "#3498db", opacity: 0.4, width: 1 },
+          move: { enable: true, speed: 12, direction: "none", random: false, straight: false, out_mode: "out" }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" } },
+          modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } }
+        },
+        retina_detect: true
+      });
+
+      const menuIcon = document.querySelector('.menu-icon');
+      const menuLinks = document.querySelector('.menu-links');
+
+      menuIcon.addEventListener('click', function() {
+        menuLinks.classList.toggle('show');
+      });
+
+      document.querySelectorAll('.menu-links a').forEach(link => {
+        link.addEventListener('click', function() {
+          menuLinks.classList.remove('show');
+        });
+      });
+    });
+  </script>
+
+  <script>
+    function toggleMenu() {
+      const menuLinks = document.querySelector('.menu-links');
+      menuLinks.style.display = (menuLinks.style.display === 'block') ? 'none' : 'block';
+    }
+  </script>
+</body>
+</html>

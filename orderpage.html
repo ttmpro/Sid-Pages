@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page Order Portal</title>
+    <style>
+ body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background-color: #f5f5f5;
+            text-align: center;
+            padding: 10px;
+        }
+
+        header img {
+            width: 256px;
+            height: 94px;
+            border-radius: 0%;
+        }
+
+        #description {
+            text-align: center;
+            padding: 20px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-input-label {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .file-input-label:hover {
+            background-color: #555;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .demo-button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            display: inline-block;
+            margin-right: 10px;
+            text-decoration: none;
+        }
+
+        .demo-button:hover {
+            background-color: #555;
+        }
+
+        #form-section {
+            margin-top: 20px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 10px;
+        }
+          .popup {
+          	display: none;
+          	position: fixed;
+          	top: 50%;
+          	left: 50%;
+          	transform: translate(-50%, -50%);
+          	background-color: #666;
+          	border: 1px solid #ddd;
+          	padding: 20px;
+          	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          	border-radius: 8px;
+          }
+        
+          .popup-title {
+          	font-size: 18px;
+          	font-weight: bold;
+          	margin-bottom: 10px;
+          }
+        
+          .popup-description {
+          	font-size: 14px;
+          	margin-bottom: 10px;
+          }
+        
+          .popup-close {
+          	cursor: pointer;
+          	font-size: 18px;
+          	color: #564715;
+          	float: right;        /* ... (styles) ... */
+    </style>
+    <script>
+        function showPopup(title, description) {
+            var popup = document.getElementById("popup");
+            var popupTitle = document.getElementById("popup-title");
+            var popupDescription = document.getElementById("popup-description");
+
+            popupTitle.innerText = title;
+            popupDescription.innerText = description;
+
+            popup.style.display = "block";
+        }
+
+        function closePopup() {
+            var popup = document.getElementById("popup");
+            popup.style.display = "none";
+        }
+
+
+  function submitForm(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Collect form data
+    var formData = new FormData(document.querySelector('form'));
+    var formText = '';
+
+    for (var [key, value] of formData.entries()) {
+        formText += key + ': ' + value + '\n';
+    }
+
+    // Attach image file, assuming it is named 'logo'
+    var imageFile = document.getElementById('logoFile').files[0];
+    if (imageFile) {
+        formData.delete('logo'); // Remove the existing 'logo' field
+        formData.append('photo', imageFile, 'logo.jpg'); // Add 'photo' field for sending photos
+    }
+
+    // Notify user with the popup
+    showPopup("Your Order is Confirmed Successfully 🎉Great news! If 🎉 Your payment has been successfully processed. Then 🚀 Keep an eye on your email; we'll send your personalized landing page link within the next 24 hours. Thank you! 🌟", ".");
+
+    // For demonstration purposes, send notification to Telegram bot
+    sendTelegramNotification(formData);
+}
+
+function sendTelegramNotification(formData) {
+    // Replace 'yourBotToken' and 'yourChatId' with your actual bot token and chat id
+    var botToken = '6946661358:AAF7MtPL0ELXvcXp54RNhFjhKANUMjJ6PIU';
+    var chatId = '-1002121820675';
+
+    // Construct the Telegram bot API URL for sending photos
+    var apiUrl = 'https://api.telegram.org/bot' + botToken + '/sendPhoto';
+
+    // Retrieve the photo from the form data
+    var photo = formData.get('photo');
+
+    // Log form data for debugging
+    console.log('Form Data:', formData);
+
+    // Create a new form data with the photo and chat_id
+    var newFormData = new FormData();
+    newFormData.append('chat_id', chatId);
+    newFormData.append('photo', photo);
+
+    // Create a separate variable for the caption
+    var caption = 'Form Data:\n';
+    for (var [key, value] of formData.entries()) {
+        caption += key + ': ' + value + '\n';
+    }
+
+    // Append the caption to the new form data
+    newFormData.append('caption', caption);
+
+    // Send form data as a message to the Telegram bot
+    fetch(apiUrl, { method: 'POST', body: newFormData })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+}
+
+
+
+ 
+
+
+        function scrollToForm() {
+        	var formSection = document.getElementById("form-section");
+        	formSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</head>
+<body>
+    <!-- ... (your content) ... -->
+
+    <!-- Provided code for the form and popup -->
+    <header>
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlieiOpuroBPOyjJiidojHeLZi1e7jQk0Y8vGoAdUJgajSxjeuBkVSSTmJqnLloN74rhUoIDODoOK3ex2GcWXYA_VTBwDUxXQO-8C6kWvCfVLC7SLsTwy-_n4xUx9bJOAWj7aUXmtec2iEaYOg-cfk6D9iXPcvo4VzIr4hjP5sTajhhN3C4X64JResS0Yd/s1280/Picsart_24-02-04_17-42-57-526.png" alt="Your Business Logo">
+    </header>
+
+    <div id="description">
+        <h2>Order Your Own Personalized Landing Page !</h2>
+           <p>Enhance your online presence with a custom landing page for just ₹20.</p>
+        <p>Receive a personalized URL using Sid Pages at "s.id/yourname".</p>
+        <p>Build a professional image and make a lasting impression.</p>
+        <div class="button-container">
+            <button onclick="scrollToForm()">Scroll Down to Order</button>
+            <a class="demo-button" href="https://aboutusnet.github.io/VFX-TEJASV/">Demo</a>
+        </div>
+    </div>
+
+    <div id="form-section">
+        <form action="/submit" method="post" onsubmit="submitForm(event)">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your name">
+
+            <label for="logo">Logo (JPG square shape):</label>
+            <label class="file-input-label" for="logoFile">Choose File</label>
+            <input type="file" accept=".png, .jpg" id="logoFile" name="logo" required>
+
+            <!-- Social Media Links -->
+            <div id="social-media-container" class="additional-links">
+                <label for="social_title">Social Media Title:</label>
+                <input type="text" name="social_title" required placeholder="Your name or user name of that platform">
+                <label for="social_link">Social Media Link:</label>
+                <input type="url" name="social_link" required placeholder="Enter the profile link">
+            </div>
+            <button type="button" onclick="addSocialMediaLink()">Add More Social Media Links</button>
+
+            <label for="about">About Us:</label>
+            <textarea id="about" name="about" required placeholder="Tell us about yourself or your business"></textarea>
+
+            <!-- Post Links -->
+            <div id="post-links-container" class="additional-links">
+                <label for="post_link">Post Link:</label>
+                <input type="text" name="post_link" required placeholder="This post will be displayed on the page">
+            </div>
+            <button type="button" onclick="addPostLink()">Add More Post Links</button>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required placeholder="your email where you want to recive the page link">
+
+            <!-- Payment Information -->
+<div id="payment-info">
+                <h3>Payment</h3>
+                <p>Email: techtvmedia.pay@gmail.com</p>
+                <button type="button" onclick="copyToClipboard()">Copy Email</button>
+                <p>Send a ₹20 gift card voucher to this email address for webpage making and hosting charges.</p>
+            </div>
+            <!-- Checkboxes -->
+           <!-- Checkboxes -->
+           <div id="checkboxes">
+           	<label>
+           		I agree to the terms and conditions.
+           		<input type="checkbox" id="agree-terms" required>
+           	</label>
+           	<label>
+           		I have successfully sent a gift card voucher to techtvmedia.pay@gmail.com.
+           		<input type="checkbox" id="send-voucher" required>
+           	</label>
+           </div>
+            <button type="submit">Place Order</button>
+        </form>
+    </div>
+
+    <!-- Popup for notifications -->
+    <div id="popup" class="popup">
+        <span id="popup-close" class="popup-close" onclick="closePopup()">✖</span>
+        <div id="popup-title" class="popup-title"></div>
+        <div id="popup-description" class="popup-description"></div>
+    </div>
+<footer>
+        <p>        © TechTv Media     </p>
+    </footer>
+    <script>
+        function addSocialMediaLink() {
+            var container = document.getElementById("social-media-container");
+            var newLink = document.createElement("div");
+            newLink.innerHTML = `
+                <label for="social_title">Social Media Title:</label>
+                <input type="text" name="social_title" required>
+                <label for="social_link">Social Media Link:</label>
+                <input type="url" name="social_link" required>
+                <span class="remove-icon" onclick="removeField(this)">❌</span>
+            `;
+            container.appendChild(newLink);
+        }
+
+        function addPostLink() {
+            var container = document.getElementById("post-links-container");
+            var newLink = document.createElement("div");
+            newLink.innerHTML = `
+                <label for="post_link">Post Link:</label>
+                <input type="text" name="post_link" required>
+                <span class="remove-icon" onclick="removeField(this)">❌</span>
+            `;
+            container.appendChild(newLink);
+        }
+
+        function removeField(element) {
+            element.parentNode.remove();
+        }
+
+        function copyToClipboard() {
+            var emailField = document.createElement("input");
+            emailField.setAttribute("value", "techtvmedia.pay@gmail.com");
+            document.body.appendChild(emailField);
+            emailField.select();
+            document.execCommand("copy");
+            document.body.removeChild(emailField);
+
+            // Notify user with the popup
+            showPopup("Email Copied", "Email address copied to clipboard.");
+        }
+    </script>
+</body>
+</html>
